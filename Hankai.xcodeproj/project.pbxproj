@@ -99,6 +99,7 @@
 		26681A0818F96E3600F0C355 /* HKJsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 26681A0618F96E3600F0C355 /* HKJsonUtils.m */; };
 		266D16DA18FA84C300B3D3AC /* HKFileSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 266D16D818FA84C300B3D3AC /* HKFileSystem.h */; };
 		266D16DB18FA84C300B3D3AC /* HKFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 266D16D918FA84C300B3D3AC /* HKFileSystem.m */; };
+		268971EE1C3ABF8F00F52BB1 /* HKDefaultDownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268971ED1C3ABF8F00F52BB1 /* HKDefaultDownloaderTests.m */; };
 		2698968C18FA0ABE00D26B76 /* HKJsonUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698968B18FA0ABE00D26B76 /* HKJsonUtilsTests.m */; };
 		269897B418FA1DA000D26B76 /* HKLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 269897B218FA1DA000D26B76 /* HKLoadingView.h */; };
 		269897B518FA1DA000D26B76 /* HKLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269897B318FA1DA000D26B76 /* HKLoadingView.m */; };
@@ -281,6 +282,7 @@
 		26681A0618F96E3600F0C355 /* HKJsonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKJsonUtils.m; sourceTree = "<group>"; };
 		266D16D818FA84C300B3D3AC /* HKFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKFileSystem.h; sourceTree = "<group>"; };
 		266D16D918FA84C300B3D3AC /* HKFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKFileSystem.m; sourceTree = "<group>"; };
+		268971ED1C3ABF8F00F52BB1 /* HKDefaultDownloaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDefaultDownloaderTests.m; sourceTree = "<group>"; };
 		2698968B18FA0ABE00D26B76 /* HKJsonUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKJsonUtilsTests.m; sourceTree = "<group>"; };
 		269897B218FA1DA000D26B76 /* HKLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLoadingView.h; sourceTree = "<group>"; };
 		269897B318FA1DA000D26B76 /* HKLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLoadingView.m; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			children = (
 				2698968B18FA0ABE00D26B76 /* HKJsonUtilsTests.m */,
 				26D9B7261BEC7CCD00261D79 /* HKHttpRequestTests.m */,
+				268971ED1C3ABF8F00F52BB1 /* HKDefaultDownloaderTests.m */,
 				2602382F18E076400064CD8C /* Supporting Files */,
 			);
 			path = HankaiTests;
@@ -709,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				268971EE1C3ABF8F00F52BB1 /* HKDefaultDownloaderTests.m in Sources */,
 				26D9B7271BEC7CCD00261D79 /* HKHttpRequestTests.m in Sources */,
 				2698968C18FA0ABE00D26B76 /* HKJsonUtilsTests.m in Sources */,
 			);

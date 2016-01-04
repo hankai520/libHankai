@@ -35,6 +35,15 @@
 
 @end
 
+
+/**
+ * 默认下载器，用iOS的API实现
+ */
+@interface HKDefaultDownloader : NSObject <HKDownloader>
+
+@end
+
+
 //下载完毕的回调原型
 typedef void (^HttpResourceDownloadDidFinish)(NSError * error, BOOL fromCache, NSData * data);
 

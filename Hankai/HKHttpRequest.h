@@ -25,27 +25,45 @@
 
 #import <Foundation/Foundation.h>
 
+@class HKHttpRequest;
+
+/**
+ *  HTTP Multipart 请求局部信息封装类
+ */
+@interface HKRequestPart : NSObject
+
+@property (nonatomic, strong) NSString *    name;
+
+@property (nonatomic, strong) NSString *    contentType;
+
+@property (nonatomic, strong) NSData *      data;
+
+@end
+
 /**
  *  HTTP 请求完成后的回调块
  *
- *  @param error        错误信息（不保证本地化）
- *  @param responseData 响应数据
- *  @param statusCode   响应的状态码
+ *  @param error            错误信息（不保证本地化）
+ *  @param originalRequest  原始请求对象
  */
-typedef void (^HKHttpRequestDidFinished)(NSError * error, NSData * responseData, NSInteger statusCode, NSDictionary * responseHeaders);
+typedef void (^HKHttpRequestDidFinished)(NSError * error, HKHttpRequest * originalRequest);
 
 /**
  *  Http 请求封装类
  */
 @interface HKHttpRequest : NSObject
 
-@property (nonatomic, strong, readonly) NSString *     url;
+@property (nonatomic, strong, readonly) NSString *      url;
 
-@property (nonatomic, strong, readonly) NSString *     method;
+@property (nonatomic, strong, readonly) NSString *      method;
 
-@property (nonatomic, strong, readonly) NSString *     queryString;//GET 和 POST 通用
+@property (nonatomic, strong, readonly) NSString *      queryString;//GET 和 POST 通用
 
-@property (nonatomic, strong, readonly) NSData *       responseData;
+@property (nonatomic, strong, readonly) NSData *        responseData;
+
+@property (nonatomic, assign, readonly) NSInteger       responseStatusCode;
+
+@property (nonatomic, strong, readonly) NSDictionary *  responseHeaders;
 
 /**
  *  设置请求完成后的回调代码块
@@ -62,7 +80,7 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, NSData * responseData,
  *
  *  @return 生成的请求实例
  */
-+ (HKHttpRequest *)get:(NSString *)url withParams:(NSDictionary *)params;
++ (instancetype)get:(NSString *)url withParams:(NSDictionary *)params;
 
 /**
  *  发起 POST 表单请求
@@ -72,7 +90,7 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, NSData * responseData,
  *
  *  @return 生成的请求实例
  */
-+ (HKHttpRequest *)post:(NSString *)url withParams:(NSDictionary *)params;
++ (instancetype)post:(NSString *)url withParams:(NSDictionary *)params;
 
 /**
  *  发起 POST 请求（重载版本）
@@ -82,7 +100,17 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, NSData * responseData,
  *
  *  @return 生成的请求实例
  */
-+ (HKHttpRequest *)post:(NSString *)url withData:(NSString *)dataString;
++ (instancetype)post:(NSString *)url withData:(NSString *)dataString;
+
+/**
+ *  发起 POST 请求（重载版本）
+ *
+ *  @param url   请求地址
+ *  @param parts Multipart类型的请求对应的局部信息数组（HKRequestPart类型）
+ *
+ *  @return 生成的请求实例
+ */
++ (instancetype)post:(NSString *)url withParts:(NSArray *)parts;
 
 /**
  *  构建一个 HTTP 标准的查询字符串
@@ -94,6 +122,16 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, NSData * responseData,
  *  @return 生成的请求实例
  */
 + (NSString *)buildQueryString:(NSDictionary *)params urlEncode:(BOOL)urlEncode sortAsc:(BOOL)sortAsc;
+
+/**
+ *  构建一个 HTTP Multipart
+ *
+ *  @param parts 局部信息数组
+ *  @param boundary 内容分界符
+ *
+ *  @return HTTP Multipart 数据
+ */
++ (NSData *)buildMultipart:(NSArray *)parts boundary:(NSString *)boundary;
 
 /**
  *  发送请求
@@ -128,3 +166,12 @@ void httpPostForm(NSString * url, NSDictionary * params, HKHttpRequestDidFinishe
  *  @param callback 回调代码块
  */
 void httpPostJson(NSString * url, NSString * json, HKHttpRequestDidFinished callback);
+
+/**
+ *  用 HTTP POST 方式上传多个文件
+ *
+ *  @param url        地址
+ *  @param localPaths 本地文件路径数组
+ *  @param callback   回调代码块
+ */
+void httpPostFiles(NSString * url, NSArray * localPaths, HKHttpRequestDidFinished callback);

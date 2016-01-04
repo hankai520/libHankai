@@ -27,10 +27,10 @@
 }
 
 - (void)testGet {
-    httpGet(@"http://www.baidu.com", nil, ^(NSError *error, NSData *responseData, NSInteger statusCode, NSDictionary *responseHeaders) {
-        NSString * str = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    httpGet(@"http://www.baidu.com", nil, ^(NSError *error, HKHttpRequest * originalRequest) {
+        NSString * str = [[NSString alloc] initWithData:originalRequest.responseData encoding:NSUTF8StringEncoding];
         NSLog(@"%@", str);
-        XCTAssertTrue(statusCode == 200);
+        XCTAssertTrue(originalRequest.responseStatusCode == 200);
         done = YES;
     });
     NSDate * timeoutDate = [NSDate dateWithTimeIntervalSinceNow:10];
@@ -43,10 +43,10 @@
 }
 
 - (void)testPost {
-    httpPostForm(@"http://www.baidu.com", @{@"kw":@"java"}, ^(NSError *error, NSData *responseData, NSInteger statusCode, NSDictionary *responseHeaders) {
-        NSString * str = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    httpPostForm(@"http://www.baidu.com", @{@"kw":@"java"}, ^(NSError *error, HKHttpRequest * originalRequest) {
+        NSString * str = [[NSString alloc] initWithData:originalRequest.responseData encoding:NSUTF8StringEncoding];
         NSLog(@"%@", str);
-        XCTAssertTrue(statusCode == 200);
+        XCTAssertTrue(originalRequest.responseStatusCode == 200);
         done = YES;
     });
     NSDate * timeoutDate = [NSDate dateWithTimeIntervalSinceNow:10];

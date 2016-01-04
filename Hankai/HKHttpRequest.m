@@ -25,17 +25,33 @@
 
 #import "HKHttpRequest.h"
 
-@interface HKHttpRequest () <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
-    __strong HKHttpRequestDidFinished    requestDidFinish;
+#define multipartBoundary       @"175a5274fa537f856d116be2f6542033"
+
+@implementation HKRequestPart
+
+@end
+
+/**
+ *  NSURLSessionDataTask 完成回调块
+ *
+ *  @param data     响应数据
+ *  @param response 响应对象
+ *  @param error    错误
+ */
+typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error);
+
+@interface HKHttpRequest () {
+    __strong HKHttpRequestDidFinished               requestDidFinish;
+    __strong NSURLSessionTaskCompletionHandler      taskCompletionHandler;
 }
 
-@property (nonatomic, strong) NSURLConnection *         connection;
-
-@property (nonatomic, strong) NSMutableData *           allData;
+@property (nonatomic, strong) NSURLSessionTask *        sessionTask;
 
 @property (nonatomic, strong) NSMutableURLRequest *     request;
 
 @property (nonatomic, strong) NSHTTPURLResponse *       response;
+
+@property (nonatomic, strong, readwrite) NSData *        responseData;
 
 @end
 
@@ -53,9 +69,16 @@
     return self.request.URL.query;
 }
 
-- (NSData *)responseData {
-    if (self.allData != nil && self.allData.length > 0) {
-        return [NSData dataWithData:self.allData];
+- (NSInteger)responseStatusCode {
+    if (self.sessionTask.state == NSURLSessionTaskStateCompleted) {
+        return self.response.statusCode;
+    }
+    return -1;
+}
+
+- (NSDictionary *)responseHeaders {
+    if (self.sessionTask.state == NSURLSessionTaskStateCompleted) {
+        return self.response.allHeaderFields;
     }
     return nil;
 }
@@ -66,7 +89,24 @@
     }
 }
 
-+ (HKHttpRequest *)get:(NSString *)url withParams:(NSDictionary *)params {
+- (instancetype)init {
+    self = [super init];
+    if (self != nil) {
+        __block HKHttpRequest * req = self;
+        self->taskCompletionHandler = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            req.response = (NSHTTPURLResponse *)response;
+            if (error == nil) {
+                req.responseData = data;
+                req->requestDidFinish(nil, req);
+            } else {
+                req->requestDidFinish(error, req);
+            }
+        };
+    }
+    return self;
+}
+
++ (instancetype)get:(NSString *)url withParams:(NSDictionary *)params {
     HKHttpRequest * req = [[HKHttpRequest alloc] init];
     NSString * queryString = [self buildQueryString:params urlEncode:YES sortAsc:YES];
     NSURL * reqUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", url, queryString]];
@@ -74,17 +114,16 @@
                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                            timeoutInterval:15];
     req.request.HTTPMethod = @"GET";
-    req.allData = [[NSMutableData alloc] initWithCapacity:64];
-    req.connection = [[NSURLConnection alloc] initWithRequest:req.request delegate:req startImmediately:NO];
+    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
-+ (HKHttpRequest *)post:(NSString *)url withParams:(NSDictionary *)params {
++ (instancetype)post:(NSString *)url withParams:(NSDictionary *)params {
     NSString * queryString = [self buildQueryString:params urlEncode:YES sortAsc:YES];
     return [self post:url withData:queryString];
 }
 
-+ (HKHttpRequest *)post:(NSString *)url withData:(NSString *)dataString {
++ (instancetype)post:(NSString *)url withData:(NSString *)dataString {
     HKHttpRequest * req = [[HKHttpRequest alloc] init];
     NSURL * reqUrl = [NSURL URLWithString:url];
     req.request = [[NSMutableURLRequest alloc] initWithURL:reqUrl
@@ -93,8 +132,22 @@
     req.request.HTTPMethod = @"POST";
     [req.request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     req.request.HTTPBody = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-    req.allData = [[NSMutableData alloc] initWithCapacity:64];
-    req.connection = [[NSURLConnection alloc] initWithRequest:req.request delegate:req startImmediately:NO];
+    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    return req;
+}
+
++ (instancetype)post:(NSString *)url withParts:(NSArray *)parts {
+    HKHttpRequest * req = [[HKHttpRequest alloc] init];
+    NSURL * reqUrl = [NSURL URLWithString:url];
+    req.request = [[NSMutableURLRequest alloc] initWithURL:reqUrl
+                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                           timeoutInterval:15];
+    req.request.HTTPMethod = @"POST";
+    NSString * boundary = multipartBoundary;
+    [req.request addValue:[NSString stringWithFormat:@"multipart/form-data;boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+    req.request.HTTPBody = [self buildMultipart:parts boundary:boundary];
+    
+    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
@@ -124,36 +177,23 @@
     return query;
 }
 
++ (NSData *)buildMultipart:(NSArray *)parts boundary:(NSString *)boundary {
+    NSMutableData * data = [[NSMutableData alloc] init];
+    NSStringEncoding encoding = NSUTF8StringEncoding;
+    for (HKRequestPart * part in parts) {
+        [data appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:encoding]];
+        [data appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data;name=\"%@\"\r\n\r\n", part.name]
+                          dataUsingEncoding:encoding]];
+        [data appendData:part.data];
+        [data appendData:[@"\r\n" dataUsingEncoding:encoding]];
+    }
+    [data appendData:[[NSString stringWithFormat:@"--%@--\r\n", multipartBoundary] dataUsingEncoding:encoding]];
+    
+    return [NSData dataWithData:data];
+}
+
 - (void)start {
-    [self.connection start];
-}
-
-#pragma mark - NSURLConnectionDelegate
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    requestDidFinish(error, nil, 0, nil);
-}
-
-- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection {
-    return NO;
-}
-
-#pragma mark - NSURLConnectionDataDelegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-        self.response = (NSHTTPURLResponse *)response;
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.allData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    if (requestDidFinish != nil) {
-        requestDidFinish(nil, [NSData dataWithData:self.allData], self.response.statusCode, self.response.allHeaderFields);
-    }
+    [self.sessionTask resume];
 }
 
 @end
@@ -173,6 +213,18 @@ void httpPostForm(NSString * url, NSDictionary * params, HKHttpRequestDidFinishe
 
 void httpPostJson(NSString * url, NSString * json, HKHttpRequestDidFinished callback) {
     HKHttpRequest * request = [HKHttpRequest post:url withData:json];
+    [request setCompletionBlock:callback];
+    [request start];
+}
+
+void httpPostFiles(NSString * url, NSArray * localPaths, HKHttpRequestDidFinished callback) {
+    NSMutableArray * parts = [NSMutableArray array];
+    for (NSString * path in localPaths) {
+        HKRequestPart * p = [HKRequestPart new];
+        p.name = [path lastPathComponent];
+        p.data = [NSData dataWithContentsOfFile:path];
+    }
+    HKHttpRequest * request = [HKHttpRequest post:url withParts:[NSArray arrayWithArray:parts]];
     [request setCompletionBlock:callback];
     [request start];
 }

@@ -27,29 +27,9 @@
 #import "NSDate+LangExt.h"
 #import "NSString+LangExt.h"
 #import "HKVars.h"
+#import "HKHttpRequest.h"
 
 #define HKDownloaderCacheDir     ([AppCachesDirectory stringByAppendingPathComponent:@"Download"])
-
-/**
- * 默认下载器，用iOS的API实现
- */
-@interface HKDefaultDownloader : NSObject <HKDownloader>
-
-@end
-
-@implementation HKDefaultDownloader
-
-- (NSData *)downloadResourceAt:(NSURL *)url error:(NSError *__autoreleasing *)error {
-    NSURLRequest * request = [NSURLRequest requestWithURL:url
-                                              cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                          timeoutInterval:60*3];
-    return [NSURLConnection sendSynchronousRequest:request
-                                 returningResponse:nil
-                                             error:error];
-}
-
-@end
-
 
 NSString * NDownloadFinished                           = @"NDDownloadFinished";
 NSString * NHttpResourceIdentifierUserInfoKey          = @"NDHttpResourceIdentifierUserInfoKey";
@@ -59,6 +39,23 @@ NSString * NHttpResourceContextUserInfoKey             = @"NDHttpResourceContext
 
 NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiverUserInfoKey";
 
+
+@implementation HKDefaultDownloader
+
+- (NSData *)downloadResourceAt:(NSURL *)url error:(NSError *__autoreleasing *)error {
+    __block BOOL done = NO;
+    __block NSData * data = nil;
+    httpGet(url.absoluteString, nil, ^(NSError *error, HKHttpRequest * originalRequest) {
+        if (error == nil) {
+            data = originalRequest.responseData;
+        }
+        done = YES;
+    });
+    while (!done && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]) {}
+    return data;
+}
+
+@end
 
 @interface NDHttpResourceOperation : NSOperation
 
