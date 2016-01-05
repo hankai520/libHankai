@@ -49,4 +49,11 @@
  */
 - (NSString *)md5Encrypt;
 
+/**
+ *  将数据作为JSON，转换为对象（NSArray, NSDictionary）
+ *
+ *  @return NSArray, NSDictionary 对象
+ */
+- (id)jsonObject;
+
 @end

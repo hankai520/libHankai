@@ -37,4 +37,13 @@
     return [HKMD5Helper md5OfNSData:self];
 }
 
+- (id)jsonObject {
+    NSError * error = nil;
+    id obj = [NSJSONSerialization JSONObjectWithData:self options:0 error:&error];
+    if (error == nil) {
+        return obj;
+    }
+    return nil;
+}
+
 @end

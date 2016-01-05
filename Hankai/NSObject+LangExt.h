@@ -30,8 +30,18 @@
  */
 @interface NSObject (LangExt)
 
+/**
+ *  尝试将当前对象转换为JSON格式的二进制数据
+ *
+ *  @return 二进制数据
+ */
 - (NSData *)jsonData;
 
+/**
+ *  尝试将当前对象转换为JSON格式的字符串
+ *
+ *  @return JSON字符串
+ */
 - (NSString *)jsonString;
 
 @end
