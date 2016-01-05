@@ -50,6 +50,7 @@
 #import "HKActionView.h"
 #import "GCDrawingImageView.h"
 #import "HKDownloadCenter.h"
+#import "HKHttpRequest.h"
 #import "HKFilterManager.h"
 #import "HKReflection.h"
 #import "HKJsonUtils.h"
