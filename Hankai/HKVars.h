@@ -90,6 +90,21 @@
 #define SystemName              ([[UIDevice currentDevice] systemName])
 #define SystemVersion           ([[UIDevice currentDevice] systemVersion])
 
+#define SystemEqualTo(v)\
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+
+#define SystemGreaterThan(v)\
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+
+#define SystemGreaterThanOrEqualTo(v)\
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define SystemLessThan(v)\
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+#define SystemLessThanOrEqualTo(v)\
+([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 //厂商唯一标识符
 #define IDFV                    ([[[UIDevice currentDevice] identifierForVendor] UUIDString])
 
