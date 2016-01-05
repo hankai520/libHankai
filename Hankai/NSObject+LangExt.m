@@ -27,7 +27,30 @@
 
 @implementation NSObject (LangExt)
 
+- (NSData *)jsonData {
+    BOOL serializable = NO;
+    if ([self isKindOfClass:[NSArray class]]) {
+        serializable = YES;
+    } else if ([self isKindOfClass:[NSDictionary class]]) {
+        serializable = YES;
+    }
+    if (serializable) {
+        NSError * error = nil;
+        NSData * data = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+        if (data != nil && error == nil) {
+            return data;
+        }
+    }
+    return nil;
+}
 
+- (NSString *)jsonString {
+    NSData * data = [self jsonData];
+    if (data != nil) {
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return nil;
+}
 
 @end
 

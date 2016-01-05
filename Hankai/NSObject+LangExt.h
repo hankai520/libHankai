@@ -25,8 +25,14 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  NSObject 语言扩展
+ */
 @interface NSObject (LangExt)
 
+- (NSData *)jsonData;
+
+- (NSString *)jsonString;
 
 @end
 
