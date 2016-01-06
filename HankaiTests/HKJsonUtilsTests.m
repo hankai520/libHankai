@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Hankai. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "Hankai.h"
+@import XCTest;
+@import Hankai;
 
 
 @interface HKTestObj : NSObject <HKJsonPropertyMappings>

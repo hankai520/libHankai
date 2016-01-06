@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKAudioUtils.h"
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
 
 @interface HKAudioUtils () <AVAudioPlayerDelegate> {
     AVAudioRecorder *       _recorder;

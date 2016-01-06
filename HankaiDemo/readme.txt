@@ -1,1 +1,0 @@
-HankaiDemo 展示了 libHankai 框架所提供的功能

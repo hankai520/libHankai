@@ -24,8 +24,8 @@
 //  THE SOFTWARE.
 
 #import "UIView+LangExt.h"
-#import <QuartzCore/QuartzCore.h>
-#import <objc/runtime.h>
+@import QuartzCore;
+@import ObjectiveC;
 
 
 @implementation UIView (LangExt)

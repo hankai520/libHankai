@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKLangExtViewController.h"
-#import "Hankai.h"
+@import Hankai;
 
 @interface HKLangExtViewController ()
 

@@ -24,7 +24,8 @@
 //  THE SOFTWARE.
 
 #import "UIImageView+LangExt.h"
-#import <QuartzCore/QuartzCore.h>
+#import "HKDownloadCenter.h"
+@import QuartzCore;
 
 @implementation UIImageView (LangExt)
 

@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKFileSystem.h"
+#import "HKVars.h"
 
 @implementation HKFileSystem
 

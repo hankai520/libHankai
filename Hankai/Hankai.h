@@ -1,5 +1,3 @@
-//  V0.0.1
-//  Require iOS >= 7.0
 //
 //  Hankai.h
 //  Hankai
@@ -13,10 +11,10 @@
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is furnished
 //  to do so, subject to the following conditions:
-//  
+//
 //  The above copyright notice and this permission notice shall be included in all
 //  copies or substantial portions of the Software.
-//  
+//
 //  THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
@@ -25,36 +23,39 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "HKImageCollectionViewCell.h"
-#import "HKVars.h"
-#import "NSData+LangExt.h"
-#import "NSDate+LangExt.h"
-#import "NSObject+LangExt.h"
-#import "NSString+LangExt.h"
-#import "NSNumber+LangExt.h"
-#import "UIAlertView+LangExt.h"
-#import "UIImageView+LangExt.h"
-#import "UINavigationController+LangExt.h"
-#import "UITableViewCell+LangExt.h"
-#import "UIView+LangExt.h"
-#import "UISearchBar+LangExt.h"
-#import "HKKeyValuePair.h"
-#import "HKCollectionViewWaterfallLayout.h"
-#import "UIColor+LangExt.h"
-#import "UIImage+LangExt.h"
-#import "UIViewController+LangExt.h"
-#import "HKTextViewViewController.h"
-#import "HKAESHelper.h"
-#import "HKBase64.h"
-#import "HKMD5Helper.h"
-#import "HKActionView.h"
-#import "GCDrawingImageView.h"
-#import "HKDownloadCenter.h"
-#import "HKFilterManager.h"
-#import "HKReflection.h"
-#import "HKJsonUtils.h"
-#import "HKLoadingView.h"
-#import "HKToastView.h"
-#import "UITextField+LangExt.h"
-#import "HKFileSystem.h"
-#import "HKMath.h"
+#import <Hankai/HKImageCollectionViewCell.h>
+#import <Hankai/HKVars.h>
+#import <Hankai/NSData+LangExt.h>
+#import <Hankai/NSDate+LangExt.h>
+#import <Hankai/NSObject+LangExt.h>
+#import <Hankai/NSString+LangExt.h>
+#import <Hankai/NSNumber+LangExt.h>
+#import <Hankai/UIAlertView+LangExt.h>
+#import <Hankai/UIImageView+LangExt.h>
+#import <Hankai/UINavigationController+LangExt.h>
+#import <Hankai/UITableViewCell+LangExt.h>
+#import <Hankai/UIView+LangExt.h>
+#import <Hankai/UISearchBar+LangExt.h>
+#import <Hankai/HKKeyValuePair.h>
+#import <Hankai/HKCollectionViewWaterfallLayout.h>
+#import <Hankai/UIColor+LangExt.h>
+#import <Hankai/UIImage+LangExt.h>
+#import <Hankai/UIViewController+LangExt.h>
+#import <Hankai/HKTextViewViewController.h>
+#import <Hankai/HKAESHelper.h>
+#import <Hankai/HKBase64.h>
+#import <Hankai/HKMD5Helper.h>
+#import <Hankai/HKActionView.h>
+#import <Hankai/GCDrawingImageView.h>
+#import <Hankai/HKDownloadCenter.h>
+#import <Hankai/HKHttpRequest.h>
+#import <Hankai/HKFilterManager.h>
+#import <Hankai/HKReflection.h>
+#import <Hankai/HKJsonUtils.h>
+#import <Hankai/HKLoadingView.h>
+#import <Hankai/HKToastView.h>
+#import <Hankai/UITextField+LangExt.h>
+#import <Hankai/HKFileSystem.h>
+#import <Hankai/HKMath.h>
+#import <Hankai/HKAudioStreaming.h>
+#import <Hankai/HKAudioUtils.h>

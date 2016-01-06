@@ -6,8 +6,8 @@
 //  Copyright © 2015 Hankai. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "HKHttpRequest.h"
+@import XCTest;
+@import Hankai;
 
 @interface HKHttpRequestTests : XCTestCase {
     BOOL done;

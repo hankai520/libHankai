@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**
  *  加载提示信息弹出框（黑色半透明圆角矩形，中间显示一段文本，文本下方会有一个 indicator）

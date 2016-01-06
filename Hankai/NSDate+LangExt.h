@@ -24,6 +24,8 @@
 //  THE SOFTWARE.
 
 
+@import UIKit;
+
 static NSInteger const SecondsPerMinute    = 60;
 static NSInteger const SecondsPerHour      = SecondsPerMinute * 60;
 static NSInteger const SecondsPerDay       = SecondsPerHour * 24;

@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 //通知：ActionView 已隐藏时发送
 extern NSString * const HKActionViewDidDismiss;

@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 #import "UITextField+LangExt.h"
-#import <objc/runtime.h>
+@import ObjectiveC;
 
 @implementation UITextField (LangExt)
 

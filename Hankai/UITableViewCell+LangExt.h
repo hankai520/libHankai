@@ -25,7 +25,7 @@
 
 #ifndef __MAC_OS_X_VERSION_MIN_REQUIRED
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**
  *  UITableViewCell 语言扩展

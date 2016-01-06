@@ -24,6 +24,8 @@
 //  THE SOFTWARE.
 
 #import "HKJsonUtils.h"
+#import "HKReflection.h"
+#import "NSDate+LangExt.h"
 
 @implementation HKJsonUtils
 
