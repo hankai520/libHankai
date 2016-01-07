@@ -25,14 +25,13 @@
 
 #ifndef __MAC_OS_X_VERSION_MIN_REQUIRED
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**
  *  UITableViewCell 语言扩展
  */
 @interface UITableViewCell (LangExt)
 
-//use tag to identify cell in xib when xib contains multiple cells.
 /**
  *  从一个定义了多个 UITableViewCell 的 xib 文件中加载特定 UITableViewCell
  *

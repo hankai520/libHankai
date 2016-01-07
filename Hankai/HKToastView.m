@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKToastView.h"
+#import "UIView+LangExt.h"
 
 @interface HKToastView () {
     NSInteger       autoDismissSeconds;//自动消失延迟时长

@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKHttpRequest.h"
+#import <NSString+LangExt.h>
 
 #define multipartBoundary       @"175a5274fa537f856d116be2f6542033"
 

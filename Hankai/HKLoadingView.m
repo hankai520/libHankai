@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "HKLoadingView.h"
+#import "UIView+LangExt.h"
 
 @interface HKLoadingView () {
     UIActivityIndicatorView *   indicator;

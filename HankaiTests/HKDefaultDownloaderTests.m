@@ -6,8 +6,8 @@
 //  Copyright © 2016 Hankai. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "HKDownloadCenter.h"
+@import XCTest;
+@import Hankai;
 
 @interface HKDefaultDownloaderTests : XCTestCase
 

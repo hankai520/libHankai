@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**
  *  UIImageView 语言扩展
@@ -36,5 +36,25 @@
  *  @param image 淡入的图片
  */
 - (void)setImageWithTransition:(UIImage *)image;
+
+/**
+ *  从网络下载图片并更新到 UIImageView
+ *
+ *  @param url              图片地址
+ *  @param showIndicator    是否显示活动提示
+ *  @param indicatorStyle   活动提示的样式
+ *  @param imageDidLoad     图片下载完后的回调块
+ */
+- (void)setImageWithUrl:(NSString *)url
+          showIndicator:(BOOL)showIndicator
+         indicatorStyle:(UIActivityIndicatorViewStyle)indicatorStyle
+           imageDidLoad:(void (^)(NSError * error))imageDidLoad;
+
+/**
+ *  从网络下载图片并更新到 UIImageView （重载版本），显示小尺寸灰色活动提示，下载完成的回调为空
+ *
+ *  @param url              图片地址
+ */
+- (void)setImageWithUrl:(NSString *)url;
 
 @end

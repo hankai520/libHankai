@@ -23,6 +23,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+@import Foundation;
+@import UIKit;
+
 /**
  *  图像滤镜组件，可以实现后，向管理器注册新的滤镜组件
  */
