@@ -59,7 +59,11 @@
                             if (clazz == [NSDate class]) {
                                 if ([object respondsToSelector:@selector(dateFormat)]) {
                                     NSString * fmt = [object dateFormat];
-                                    value = [NSDate dateFromNSString:value withFormat:fmt];
+                                    if ([fmt isEqualToString:TIMESTAMP_FORMAT]) {
+                                        value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
+                                    } else {
+                                        value = [NSDate dateFromNSString:value withFormat:fmt];
+                                    }
                                 }
                             }
                         }

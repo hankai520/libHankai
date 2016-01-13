@@ -34,17 +34,18 @@ static NSInteger const SecondsPerDay       = SecondsPerHour * 24;
 #define HKTimestamp                       ([[NSDate date] timeIntervalSince1970])
 
 //常用日期格式
-#define Default_Date_Format             @"yyyy-MM-dd"
-#define Date_Format1                    @"yyyy/MM/dd EE" //... 周二
-#define Date_Format2                    @"yyyy/MM/dd EEEE" //... 星期三
-#define Date_Format3                    @"yyyy/MM/dd"
+#define DEFAULT_DATE_FORMAT             @"yyyy-MM-dd"
+#define DATE_FORMAT1                    @"yyyy/MM/dd EE" //... 周二
+#define DATE_FORMAT2                    @"yyyy/MM/dd EEEE" //... 星期三
+#define DATE_FORMAT3                    @"yyyy/MM/dd"
 
-#define Default_Date_Time_Format        @"yyyy-MM-dd hh:mm:ss"//12小时制
-#define Date_Time_Format1               @"yyyy-MM-dd HH:mm"//24小时制
+#define DEFAULT_DATE_TIME_FORMAT        @"yyyy-MM-dd HH:mm:ss"//12小时制
 
-#define Default_Time_Format             @"hh:mm:ss"
-#define Time_Format1                    @"hh:mm"
-#define Time_Format2                    @"HH:mm"
+#define DEFAULT_TIME_FORMAT             @"HH:mm:ss"
+#define TIME_FORMAT1                    @"hh:mm"
+#define TIME_FORMAT2                    @"HH:mm"
+
+#define TIMESTAMP_FORMAT                @"timestamp" //时间戳格式：1970年至今的秒数
 
 //日期对比模式掩码
 typedef enum {
