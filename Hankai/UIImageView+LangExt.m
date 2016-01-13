@@ -25,6 +25,7 @@
 
 #import "UIImageView+LangExt.h"
 #import "HKDownloadCenter.h"
+#import "NSString+LangExt.h"
 @import QuartzCore;
 
 @implementation UIImageView (LangExt)
@@ -45,6 +46,9 @@
           showIndicator:(BOOL)showIndicator
          indicatorStyle:(UIActivityIndicatorViewStyle)indicatorStyle
            imageDidLoad:(void (^)(NSError * error))imageDidLoad {
+    if (isEmptyString(url)) {
+        return;
+    }
     UIActivityIndicatorView * iv = [self viewWithTag:8888];
     if (showIndicator) {
         if (iv == nil) {
