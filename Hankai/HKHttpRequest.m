@@ -109,8 +109,12 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
 
 + (instancetype)get:(NSString *)url withParams:(NSDictionary *)params {
     HKHttpRequest * req = [[HKHttpRequest alloc] init];
-    NSString * queryString = [self buildQueryString:params urlEncode:YES sortAsc:YES];
-    NSURL * reqUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", url, queryString]];
+    NSMutableString * urlString = [NSMutableString stringWithString:url];
+    if (params != nil && params.count > 0) {
+        NSString * queryString = [self buildQueryString:params urlEncode:YES sortAsc:YES];
+        [urlString appendFormat:@"?%@", queryString];
+    }
+    NSURL * reqUrl = [NSURL URLWithString:urlString];
     req.request = [[NSMutableURLRequest alloc] initWithURL:reqUrl
                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                            timeoutInterval:15];
