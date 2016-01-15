@@ -42,30 +42,20 @@ NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiv
 
 @interface HKDefaultDownloader()
 
-@property (nonatomic, strong) NSCondition *     condition;
-
 @end
 
 @implementation HKDefaultDownloader
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.condition = [[NSCondition alloc] init];
-    }
-    return self;
-}
-
 - (NSData *)downloadResourceAt:(NSURL *)url error:(NSError *__autoreleasing *)error {
-    [self.condition lock];
+    __block BOOL done = NO;
     __block NSData * data = nil;
     httpGet(url.absoluteString, nil, ^(NSError *error, HKHttpRequest * originalRequest) {
         if (error == nil) {
             data = originalRequest.responseData;
         }
-        [self.condition signal];
+        done = YES;
     });
-    [self.condition wait];
+    while (!done) {}
     return data;
 }
 
