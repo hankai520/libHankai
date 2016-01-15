@@ -27,6 +27,8 @@
 
 @class HKHttpRequest;
 
+#define multipartBoundary       @"----175a5274fa537f856d116be2f6542033"
+
 /**
  *  HTTP Multipart 请求局部信息封装类
  */
@@ -37,6 +39,10 @@
 @property (nonatomic, strong) NSString *    contentType;
 
 @property (nonatomic, strong) NSData *      data;
+
+@property (nonatomic, assign) BOOL          isFile;
+
+@property (nonatomic, strong) NSString *    fileName;
 
 @end
 
@@ -100,7 +106,17 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, HKHttpRequest * origin
  *
  *  @return 生成的请求实例
  */
-+ (instancetype)post:(NSString *)url withData:(NSString *)dataString;
++ (instancetype)post:(NSString *)url withDataString:(NSString *)dataString;
+
+/**
+ *  发起 POST 请求（重载版本）
+ *
+ *  @param url      请求地址
+ *  @param rawData  body部分的原始数据（内部不会对rawData作任何处理）
+ *
+ *  @return 生成的请求实例
+ */
++ (instancetype)post:(NSString *)url withRawData:(NSData *)rawData contentType:(NSString *)contentType;
 
 /**
  *  发起 POST 请求（重载版本）
@@ -126,7 +142,7 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, HKHttpRequest * origin
 /**
  *  构建一个 HTTP Multipart
  *
- *  @param parts 局部信息数组
+ *  @param parts 局部信息数组 (数组元素为 HKRequestPart)
  *  @param boundary 内容分界符
  *
  *  @return HTTP Multipart 数据
@@ -175,3 +191,12 @@ void httpPostJson(NSString * url, NSString * json, HKHttpRequestDidFinished call
  *  @param callback   回调代码块
  */
 void httpPostFiles(NSString * url, NSArray * localPaths, HKHttpRequestDidFinished callback);
+
+/**
+ *  用 HTTP POST 方式提交multipart/form-data表单
+ *
+ *  @param url      地址
+ *  @param parts    HKRequestPart 数组
+ *  @param callback   回调代码块
+ */
+void httpPostMultiparts(NSString * url, NSArray * parts, HKHttpRequestDidFinished callback);
