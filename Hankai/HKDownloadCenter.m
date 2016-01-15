@@ -55,7 +55,9 @@ NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiv
         }
         done = YES;
     });
-    while (!done) {}
+    while (!done) {
+        [NSThread sleepForTimeInterval:0.001f];//1ms
+    }
     return data;
 }
 
