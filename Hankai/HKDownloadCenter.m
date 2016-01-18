@@ -49,11 +49,12 @@ NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiv
 - (NSData *)downloadResourceAt:(NSURL *)url error:(NSError *__autoreleasing *)error {
     __block BOOL done = NO;
     __block NSData * data = nil;
-    httpGet(url.absoluteString, nil, ^(NSError *error, HKHttpRequest * originalRequest) {
-        if (error == nil) {
+    httpGet(url.absoluteString, nil, ^(NSError *err, HKHttpRequest * originalRequest) {
+        if (err == nil) {
             data = originalRequest.responseData;
         }
         done = YES;
+        *error = err;
     });
     while (!done) {
         [NSThread sleepForTimeInterval:0.001f];//1ms
