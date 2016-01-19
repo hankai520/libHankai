@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 
 @import Foundation;
-#import <CommonCrypto/CommonCryptor.h>
 
 /**
  *  AES加密算法封装类。
@@ -36,11 +35,11 @@
 *
 *  @param data      要加密的数据
 *  @param key       秘钥
-*  @param keySize   秘钥长度
-*  @param operation 操作标志位（加密或解密）
+*  @param keySize   秘钥长度（参阅 <CommonCrypto/CommonCryptor.h> kCCKeySizeAES128 节）
+*  @param operation 操作标志位（加密或解密 参阅 <CommonCrypto/CommonCryptor.h> CCOperation 枚举 ）
 *
 *  @return 加密后的密文数据
 */
-+ (NSData *)cryptData:(NSData *)data withKey:(NSString *)key keySize:(size_t)keySize operation:(CCOperation)operation;
++ (NSData *)cryptData:(NSData *)data withKey:(NSString *)key keySize:(size_t)keySize operation:(uint32_t)operation;
 
 @end

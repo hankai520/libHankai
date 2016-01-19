@@ -24,12 +24,13 @@
 //  THE SOFTWARE.
 
 #import "NSData+langExt.h"
+#import <CommonCrypto/CommonCryptor.h>
 #import "HKAESHelper.h"
 #import "HKMD5Helper.h"
 
 @implementation NSData (HKExt)
 
-- (NSData *)aesCryptWithKey:(NSString *)key keySize:(size_t)keySize operation:(CCOperation)operation {
+- (NSData *)aesCryptWithKey:(NSString *)key keySize:(size_t)keySize operation:(uint32_t)operation {
     return [HKAESHelper cryptData:self withKey:key keySize:keySize operation:operation];
 }
 

@@ -24,11 +24,12 @@
 //  THE SOFTWARE.
 
 #import "HKAESHelper.h"
+#import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation HKAESHelper
 
-+ (NSData *)cryptData:(NSData *)data withKey:(NSString *)key keySize:(size_t)keySize operation:(CCOperation)operation {
++ (NSData *)cryptData:(NSData *)data withKey:(NSString *)key keySize:(size_t)keySize operation:(uint32_t)operation {
     // 'key' will be null-padded
 	char keyPtr[keySize+1]; // room for terminator (unused)
 	bzero(keyPtr, sizeof(keyPtr)); // fill with zeroes (for padding)

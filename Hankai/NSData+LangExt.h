@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 @import Foundation;
-#import <CommonCrypto/CommonCryptor.h>
+
 
 /**
  *  NSData 语言扩展
@@ -40,7 +40,7 @@
 *
 *  @return 密文数据
 */
-- (NSData*)aesCryptWithKey:(NSString *)key keySize:(size_t)keySize operation:(CCOperation)operation;
+- (NSData*)aesCryptWithKey:(NSString *)key keySize:(size_t)keySize operation:(uint32_t)operation;
 
 /**
  *  用MD5算法对数据进行加密

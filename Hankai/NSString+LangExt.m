@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "NSString+LangExt.h"
+#import <CommonCrypto/CommonCryptor.h>
 #import "HKMD5Helper.h"
 #import "HKAESHelper.h"
 #import "HKBase64.h"
