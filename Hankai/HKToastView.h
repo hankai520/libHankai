@@ -26,7 +26,7 @@
 @import UIKit;
 
 /**
- * 仿android的消息提示框。允许自定义背景图片，提示图标。
+ * 仿android的消息提示框（黑色半透明背景，白色文字，圆角矩形区块）。
  *
  */
 
@@ -36,10 +36,10 @@
    * * * * * * * * * * * * * * * * * * * * * * * * *
   *                     background                  *
  *                                                   *
- *   * * * * *    * * * * * * * * * * * * * * *      *
- *   *  icon *    * text                      *      *
- *   *       *    *                           *      *
- *   * * * * *    * * * * * * * * * * * * * * *      *
+ *          * * * * * * * * * * * * * * *            *
+ *          * text                      *            *
+ *          *                           *            *
+ *          * * * * * * * * * * * * * * *            *
  *                                                   *
   *                                                 *
    * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -48,26 +48,52 @@
 
 @interface HKToastView : UIView
 
+/**
+ *  设置多长时间后自动消失
+ *
+ *  @param seconds 延时秒数
+ */
 + (void)setAutoDismissSeconds:(NSInteger)seconds;
 
+/**
+ *  设置在显示时出现的屏幕位置
+ *
+ *  @param frame 在屏幕中的位置和尺寸信息
+ */
 + (void)setToastFrame:(CGRect)frame;
 
-+ (void)setIconEdgeInsets:(UIEdgeInsets)insets;
-
-+ (void)setTextEdgeInsets:(UIEdgeInsets)insets;
-
+/**
+ *  设置文本颜色
+ *
+ *  @param color 文本色
+ */
 + (void)setTextColor:(UIColor *)color;
 
-+ (void)setIcon:(UIImage *)icon andBackgroundImage:(UIImage *)background;
+/**
+ *  设置文本周边留白大小
+ *
+ *  @param insets 留白大小
+ */
++ (void)setTextEdgeInsets:(UIEdgeInsets)insets;
 
+/**
+ *  在窗口中弹出提示
+ *
+ *  @param text 文本
+ */
 + (void)presentInWindowWithText:(NSString *)text;
 
-+ (void)presentInWindowWithError:(NSError *)error;
-
+/**
+ *  在父视图中弹出提示
+ *
+ *  @param container 父视图
+ *  @param text      文本
+ */
 + (void)presentInView:(UIView *)container withText:(NSString *)text;
 
-+ (void)presentInView:(UIView *)container withError:(NSError *)error;
-
+/**
+ *  隐藏提示消息
+ */
 + (void)dismiss;
 
 @end

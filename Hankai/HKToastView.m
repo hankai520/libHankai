@@ -28,14 +28,8 @@
 
 @interface HKToastView () {
     NSInteger       autoDismissSeconds;//自动消失延迟时长
-    
     CGRect          toastFrame;
-    
-    UIImageView *   backgroundImageView;
-    UIImageView *   iconImageView;
     UILabel *       textLabel;
-    
-    UIEdgeInsets    iconEdgeInsets;
     UIEdgeInsets    textEdgeInsets;
 }
 
@@ -43,69 +37,29 @@
 
 @implementation HKToastView
 
-- (void)updateAllConstraints {
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [backgroundImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [iconImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    //设置背景图片的布局规则
-    [backgroundImageView addFullFillConstraints];
-    
-    //设置图标和文本布局规则
-    NSDictionary * views =  NSDictionaryOfVariableBindings(iconImageView, textLabel);
-    
-    if (iconImageView.image != nil) {
-        NSString * vfl = [NSString stringWithFormat:@"H:|-%f-[iconImageView]-%f-[textLabel]",
-                          iconEdgeInsets.left, iconEdgeInsets.right + textEdgeInsets.left];
-        [iconImageView.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-        
-        vfl = [NSString stringWithFormat:@"V:|-%f-[iconImageView]-%f-|", iconEdgeInsets.top, iconEdgeInsets.bottom];
-        [iconImageView.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-        
-        vfl = [NSString stringWithFormat:@"H:[textLabel]-%f-|", textEdgeInsets.right];
-        [textLabel.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-        
-        vfl = [NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", textEdgeInsets.top, textEdgeInsets.bottom];
-        [textLabel.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-    } else {
-        [iconImageView removeConstraints:iconImageView.constraints];
-        
-        NSString * vfl = [NSString stringWithFormat:@"H:|-%f-[textLabel]-%f-|", textEdgeInsets.left, textEdgeInsets.right];
-        [textLabel.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-        
-        vfl = [NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", textEdgeInsets.top, textEdgeInsets.bottom];
-        [textLabel.superview addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:vfl options:0 metrics:nil views:views]];
-    }
+- (void)updateFrames {
+    self.frame = toastFrame;
+    CGFloat w = toastFrame.size.width - textEdgeInsets.left - textEdgeInsets.right;
+    CGFloat h = toastFrame.size.height - textEdgeInsets.top - textEdgeInsets.bottom;
+    textLabel.frame = CGRectMake(textEdgeInsets.left, textEdgeInsets.top, w, h);
 }
-
 
 + (instancetype)sharedInstance {
     static HKToastView * toast = nil;
     
     if (toast == nil) {
         toast = [[HKToastView alloc] initWithFrame:CGRectZero];
-        toast.backgroundColor = [UIColor clearColor];
+        toast.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.7f];
+        toast.radius = 2.0f;
         toast->autoDismissSeconds = 2;
-        
-        toast->iconEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
         toast->textEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
-        
-        toast->backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        toast->backgroundImageView.backgroundColor = [UIColor clearColor];
-        
-        toast->iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        toast->iconImageView.backgroundColor = [UIColor clearColor];
-        toast->iconImageView.contentMode = UIViewContentModeCenter;
         
         toast->textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         toast->textLabel.backgroundColor = [UIColor clearColor];
         toast->textLabel.font = [UIFont systemFontOfSize:14];
-        toast->textLabel.textColor = [UIColor blackColor];
+        toast->textLabel.textColor = [UIColor whiteColor];
         toast->textLabel.textAlignment = NSTextAlignmentCenter;
         
-        [toast addSubview:toast->backgroundImageView];
-        [toast addSubview:toast->iconImageView];
         [toast addSubview:toast->textLabel];
     }
     
@@ -122,9 +76,9 @@
     tst->toastFrame = frame;
 }
 
-+ (void)setIconEdgeInsets:(UIEdgeInsets)insets {
++ (void)setTextColor:(UIColor *)color {
     HKToastView * tst = [self sharedInstance];
-    tst->iconEdgeInsets = insets;
+    tst->textLabel.textColor = color;
 }
 
 + (void)setTextEdgeInsets:(UIEdgeInsets)insets {
@@ -132,25 +86,9 @@
     tst->textEdgeInsets = insets;
 }
 
-+ (void)setTextColor:(UIColor *)color {
-    HKToastView * tst = [self sharedInstance];
-    tst->textLabel.textColor = color;
-}
-
-+ (void)setIcon:(UIImage *)icon andBackgroundImage:(UIImage *)background {
-    HKToastView * tst = [self sharedInstance];
-    tst->backgroundImageView.image = background;
-    tst->iconImageView.image = icon;
-}
-
 + (void)presentInWindowWithText:(NSString *)text {
     UIWindow * win = [[UIApplication sharedApplication] keyWindow];
     [self presentInView:win withText:text];
-}
-
-+ (void)presentInWindowWithError:(NSError *)error {
-    UIWindow * win = [[UIApplication sharedApplication] keyWindow];
-    [self presentInView:win withError:error];
 }
 
 + (void)presentInView:(UIView *)container withText:(NSString *)text {
@@ -158,43 +96,12 @@
         [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         HKToastView * tst = [self sharedInstance];
         [container addSubview:tst];
-        tst.frame = tst->toastFrame;
         tst->textLabel.text = text;
-        [tst updateAllConstraints];
+        [tst updateFrames];
         
         [NSObject cancelPreviousPerformRequestsWithTarget:[HKToastView class] selector:@selector(dismiss) object:nil];
         [[HKToastView class] performSelector:@selector(dismiss) withObject:nil afterDelay:tst->autoDismissSeconds];
     });
-}
-
-+ (void)presentInView:(UIView *)container withError:(NSError *)error {
-    NSMutableString * msg = [NSMutableString string];
-    
-    NSString * desc = error.userInfo[NSLocalizedDescriptionKey];
-    NSString * reason = error.userInfo[NSLocalizedFailureReasonErrorKey];
-    NSString * suggestion = error.userInfo[NSLocalizedRecoverySuggestionErrorKey];
-    
-    if (desc != nil) {
-        [msg appendFormat:@"%@", desc];
-    }
-    
-    if (reason != nil) {
-        if (desc != nil) {
-            [msg appendFormat:@", %@", reason];
-        } else {
-            [msg appendFormat:@"%@", reason];
-        }
-    }
-    
-    if (suggestion != nil) {
-        if (desc != nil || reason != nil) {
-            [msg appendFormat:@", %@", suggestion];
-        } else {
-            [msg appendFormat:@"%@", suggestion];
-        }
-    }
-    
-    [self presentInView:container withText:[NSString stringWithString:msg]];
 }
 
 + (void)dismiss {
