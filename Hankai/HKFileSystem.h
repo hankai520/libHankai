@@ -26,11 +26,11 @@
 @import Foundation;
 
 typedef enum {
-    HKFileSizeUnitByte,     //byte
-    HKFileSizeUnitKiloByte, //KB
-    HKFileSizeUnitMegaByte, //MB
-    HKFileSizeUnitGigaByte, //GB
-    HKFileSizeUnitTeraByte  //TB
+    HKFileSizeUnitByte          = 1, //byte
+    HKFileSizeUnitKiloByte      = 2, //KB
+    HKFileSizeUnitMegaByte      = 3, //MB
+    HKFileSizeUnitGigaByte      = 4, //GB
+    HKFileSizeUnitTeraByte      = 5  //TB
 } HKFileSizeUnit;
 
 /**
@@ -39,17 +39,51 @@ typedef enum {
 @interface HKFileSystem : NSObject
 
 /**
- *  计算缓存文件的大小。如果path对应的是 AppCachesDirectory 下的一个子目录，则会计算该目录下所有缓存文件的大小之和。
- *  该函数不会递归的计算素有子目录中的文件大小
+ *  递归的计算目录大小
  *
- *  @param path 相对于 AppCachesDirectory 的文件路径
+ *  @param directoryUrl 目录路径
  *
- *  @return 文件大小
+ *  @return 目录大小（字节）
  */
-+ (unsigned long long int)cacheItemSize:(NSString *)path;
++ (NSUInteger)getDirectoryFileSize:(NSURL *)directoryUrl;
 
 /**
- *  清空所有缓存文件
+ *  递归的计算程序沙盒中缓存目录大小
+ *
+ *  @param unit 返回的文件大小单位（保留最多1位小数）
+ *
+ *  @return 目录大小
+ */
++ (float)cacheSizeInUnit:(HKFileSizeUnit)unit;
+
+/**
+ *  递归的计算程序沙盒中缓存子目录大小
+ *
+ *  @param subDir 沙盒缓存目录下的子目录
+ *  @param unit 返回的文件大小单位（保留最多1位小数）
+ *
+ *  @return 目录大小
+ */
++ (float)cacheSizeForSubDir:(NSString *)subDir inUnit:(HKFileSizeUnit)unit;
+
+/**
+ *  将缓存目录大小转化为更有效的文字，例如：5.1 MB
+ *
+ *  @return 目录大小文本
+ */
++ (NSString *)humanReadableCacheSize;
+
+/**
+ *  将文件大小转换为可读性更高的文本
+ *
+ *  @param size 文件大小
+ *
+ *  @return 文本
+ */
++ (NSString *)humanReadableCacheSize:(float)size;
+
+/**
+ *  清空程序沙盒中的缓存目录
  */
 + (void)cleanCaches;
 
