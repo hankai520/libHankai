@@ -92,6 +92,8 @@
 		2668223F1C3D85C8001F369D /* HKGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223B1C3D85C8001F369D /* HKGUIViewController.m */; };
 		266822401C3D85C8001F369D /* HKLangExtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223D1C3D85C8001F369D /* HKLangExtViewController.m */; };
 		266BBA011C3D8F69009DD4C9 /* Hankai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 266821621C3D7F01001F369D /* Hankai.framework */; };
+		26C4BD251C5B3F4C000B2D0A /* UITableView+LangExt.h in Headers */ = {isa = PBXBuildFile; fileRef = 26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26C4BD261C5B3F4C000B2D0A /* UITableView+LangExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +207,8 @@
 		2668223B1C3D85C8001F369D /* HKGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKGUIViewController.m; sourceTree = "<group>"; };
 		2668223C1C3D85C8001F369D /* HKLangExtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLangExtViewController.h; sourceTree = "<group>"; };
 		2668223D1C3D85C8001F369D /* HKLangExtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLangExtViewController.m; sourceTree = "<group>"; };
+		26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+LangExt.h"; sourceTree = "<group>"; };
+		26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+LangExt.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +320,8 @@
 				266821DE1C3D8046001F369D /* UISearchBar+LangExt.m */,
 				266821DF1C3D8046001F369D /* UITextField+LangExt.h */,
 				266821E01C3D8046001F369D /* UITextField+LangExt.m */,
+				26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */,
+				26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */,
 			);
 			name = LangExt;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26C4BD251C5B3F4C000B2D0A /* UITableView+LangExt.h in Headers */,
 				266821661C3D7F01001F369D /* Hankai.h in Headers */,
 				2668216E1C3D7F6A001F369D /* HKVars.h in Headers */,
 				266821F11C3D8046001F369D /* UIColor+LangExt.h in Headers */,
@@ -645,6 +652,7 @@
 				266821E41C3D8046001F369D /* HKReflection.m in Sources */,
 				266821E21C3D8046001F369D /* HKKeyValuePair.m in Sources */,
 				2668219C1C3D7FFD001F369D /* HKAudioStreaming.m in Sources */,
+				26C4BD261C5B3F4C000B2D0A /* UITableView+LangExt.m in Sources */,
 				266821EE1C3D8046001F369D /* NSNumber+LangExt.m in Sources */,
 				266821921C3D7FD5001F369D /* GCDrawingImageView.m in Sources */,
 				2668218C1C3D7FD5001F369D /* HKTextViewViewController.m in Sources */,

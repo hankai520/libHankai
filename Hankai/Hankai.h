@@ -59,3 +59,4 @@
 #import <Hankai/HKMath.h>
 #import <Hankai/HKAudioStreaming.h>
 #import <Hankai/HKAudioUtils.h>
+#import <Hankai/UITableView+LangExt.h>
