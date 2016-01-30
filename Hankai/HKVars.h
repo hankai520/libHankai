@@ -23,9 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-/*
-    常用的目录
- */
+#pragma mark - 常用的目录
 
 //程序的 Document 目录。该目录默认会被 iCloud 同步至云端。
 #define AppDocumentDirectory    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
@@ -46,9 +44,7 @@
 #define AppCookieDirectory      [AppLibraryDirectory stringByAppendingPathComponent:@"Cookies"]
 
 
-/*
-    程序包元数据
- */
+#pragma mark - 程序包元数据
 
 //程序主 Bundle 名称
 #define MainBundleName          [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
@@ -72,9 +68,7 @@
 //设备的首选语言
 #define SystemLanguage          [[NSLocale preferredLanguages] objectAtIndex:0]
 
-/*
-    URL 模板
- */
+#pragma mark - URL 模板
 
 //程序在 iTunes 中的详细信息页面 URL
 #define AppDetailsUrlTemplate(appId)    [NSString stringWithFormat:@"itms://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=%@&mt=8", #appId]
@@ -82,30 +76,38 @@
 //程序在 iTunes 中的评论页面 URL
 #define AppReviewsUrlTemplate(appId)    [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", #appId]
 
-/*
-    常用设备参数
- */
+#pragma mark - 常用设备参数
 
-//操作系统
+//操作系统版本信息
 #define SystemName              ([[UIDevice currentDevice] systemName])
 #define SystemVersion           ([[UIDevice currentDevice] systemVersion])
 
+//系统版本是否等于
 #define SystemEqualTo(v)\
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 
+//系统版本是否大于
 #define SystemGreaterThan(v)\
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
+//系统版本是否大于或等于
 #define SystemGreaterThanOrEqualTo(v)\
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
+//系统版本是否小于
 #define SystemLessThan(v)\
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
+//系统版本是否小于或等于
 #define SystemLessThanOrEqualTo(v)\
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-//厂商唯一标识符
+//应用程序提供商唯一标识符
 #define IDFV                    ([[[UIDevice currentDevice] identifierForVendor] UUIDString])
 
+#pragma mark - 效率
+//在非调试模式下，禁用 NSLog，降低资源使用，提高运行速度
+#ifndef DEBUG
+    #define NSLog(...);
+#endif
 
