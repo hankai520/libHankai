@@ -313,7 +313,9 @@ NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiv
             operation.downloader = _downloader;
             operation.delegate = self;
             operation.didFinishSelector = @selector(httpDownloadFinished:);
-            [operation.callbacks addObject:whenFinish];
+            if (whenFinish != nil) {
+                [operation.callbacks addObject:whenFinish];
+            }
             operation.cacheEnabled = cacheToDisk;
             
             [_queue addOperation:operation];

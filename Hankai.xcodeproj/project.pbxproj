@@ -559,13 +559,14 @@
 				TargetAttributes = {
 					266821611C3D7F01001F369D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9P2R89KNN2;
 					};
 					266822081C3D8565001F369D = {
 						CreatedOnToolsVersion = 7.2;
 					};
 					2668221D1C3D85A7001F369D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 35GFA2FH7F;
+						DevelopmentTeam = 9P2R89KNN2;
 					};
 				};
 			};
@@ -808,6 +809,7 @@
 		2668216B1C3D7F01001F369D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -817,7 +819,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.Hankai;
+				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.libhankai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -826,6 +828,7 @@
 		2668216C1C3D7F01001F369D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -835,7 +838,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.Hankai;
+				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.libhankai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

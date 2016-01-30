@@ -82,7 +82,7 @@
 }
 
 - (NSString *)urlEncodedUTF8String {
-    NSString * encodedString = (__bridge NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+    NSString * encodedString = (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                                            (CFStringRef)self,
                                                                                            NULL,
                                                                                            (CFStringRef)@":/=,!$&'()*+;[]@#?",
@@ -91,7 +91,7 @@
 }
 
 - (NSString *)urlDecodedUtf8String {
-    NSString * decodedString = (__bridge NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+    NSString * decodedString = (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
                                                                                                             (CFStringRef)self,
                                                                                                             CFSTR(""),
                                                                                                             kCFStringEncodingUTF8);

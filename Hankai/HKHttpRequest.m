@@ -147,7 +147,7 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
                                            timeoutInterval:15];
     req.request.HTTPMethod = @"POST";
     [req.request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    [req.request addValue:[NSString stringWithFormat:@"%ld", rawData.length] forHTTPHeaderField:@"Content-Length"];
+    [req.request addValue:[NSString stringWithFormat:@"%lu", (unsigned long)rawData.length] forHTTPHeaderField:@"Content-Length"];
     req.request.HTTPBody = rawData;
     req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
