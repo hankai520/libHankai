@@ -68,7 +68,9 @@
     [[HKDownloadCenter defaultCenter] downloadHTTPResourceAt:url
                                                  cacheToDisk:YES
                                                   whenFinish:^(NSError *error, BOOL fromCache, NSData *data) {
-                                                      self.image = [UIImage imageWithData:data];
+                                                      if (data.length > 0) {
+                                                          self.image = [UIImage imageWithData:data];
+                                                      }
                                                       if (imageDidLoad != nil) {
                                                           imageDidLoad(error);
                                                       }
