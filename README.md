@@ -31,11 +31,11 @@ libHankai是一个封装了一些常用功能、算法的 iOS 静态库。
 如何接入
 --------
 
--   下载框架源码，放到工程下任意目录
+-   下载框架源码，放到你工程根目录下的 lib 目录
 
--   打开你的工程
+-   在 Xcode 中 打开你的工程
 
--   在 Finder 中，将 Hankai.xcodeproj 文件拖拽至你的工程中
+-   在 Finder 中，将 Hankai.xcodeproj 文件拖拽至你的工程的 Frameworks 组
 
 -   在你的工程中，选中要连接框架的 target，切换到 Build Phases 标签
 
@@ -49,9 +49,19 @@ libHankai是一个封装了一些常用功能、算法的 iOS 静态库。
 -   在你工程的 target 的 Build Settings 中，确保 Enable Modules (C and
     Objective-C) 选项值是 YES
 
+-   在你工程的 target 的 Build Settings 中，确保 Allow Non-modular Includes In
+    Framework Modules 选项值是 YES
+
 -   在你工程的 AppDelegate.m 文件顶部添加 \@import Hankai;
 
--   编译你工程的 target
+-   在你工程的 AppDelegate.m 文件 **didFinishLaunchingWithOptions
+    **函数实现中，添加一行代码
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NSLog(@"%@", isEmptyString(@"") ? @"yes" : @"no”);  
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-   编译并运行你工程的 target
 
  
 
