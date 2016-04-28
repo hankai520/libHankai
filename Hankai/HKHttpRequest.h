@@ -65,11 +65,15 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, HKHttpRequest * origin
 
 @property (nonatomic, strong, readonly) NSString *      queryString;//GET 和 POST 通用
 
+@property (nonatomic, strong, readonly) NSMutableURLRequest *      request;
+
 @property (nonatomic, strong, readonly) NSData *        responseData;
 
 @property (nonatomic, assign, readonly) NSInteger       responseStatusCode;
 
 @property (nonatomic, strong, readonly) NSDictionary *  responseHeaders;
+
+@property (nonatomic, strong, readonly) NSError *       error;
 
 /**
  *  设置请求完成后的回调代码块
@@ -153,6 +157,11 @@ typedef void (^HKHttpRequestDidFinished)(NSError * error, HKHttpRequest * origin
  *  发送请求
  */
 - (void)start;
+
+/**
+ *  发送同步请求（请求被处理时，线程将在此方法调用处阻塞）。
+ */
+- (void)startSynchronously;
 
 @end
 

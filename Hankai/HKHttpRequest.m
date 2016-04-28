@@ -44,13 +44,17 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     __strong NSURLSessionTaskCompletionHandler      taskCompletionHandler;
 }
 
-@property (nonatomic, strong) NSURLSessionTask *        sessionTask;
+@property (nonatomic, strong) NSURLSessionTask *                    sessionTask;
 
-@property (nonatomic, strong) NSMutableURLRequest *     request;
+@property (nonatomic, strong, readwrite) NSMutableURLRequest *      request;
 
-@property (nonatomic, strong) NSHTTPURLResponse *       response;
+@property (nonatomic, strong) NSHTTPURLResponse *                   response;
 
-@property (nonatomic, strong, readwrite) NSData *        responseData;
+@property (nonatomic, strong, readwrite) NSData *                   responseData;
+
+@property (nonnull, strong) dispatch_semaphore_t                    dispatchSemaphore; //用于处理同步请求
+
+@property (nonatomic, strong, readwrite) NSError *                  error;
 
 @end
 
@@ -94,11 +98,13 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
         __block HKHttpRequest * req = self;
         self->taskCompletionHandler = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             req.response = (NSHTTPURLResponse *)response;
-            if (error == nil) {
-                req.responseData = data;
-                req->requestDidFinish(nil, req);
-            } else {
+            req.error = error;
+            req.responseData = data;
+            if (req->requestDidFinish != nil) {
                 req->requestDidFinish(error, req);
+            }
+            if (self.dispatchSemaphore != nil) {
+                dispatch_semaphore_signal(req.dispatchSemaphore);
             }
         };
     }
@@ -218,6 +224,12 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
 
 - (void)start {
     [self.sessionTask resume];
+}
+
+- (void)startSynchronously {
+    self.dispatchSemaphore = dispatch_semaphore_create(0);
+    [self.sessionTask resume];
+    dispatch_semaphore_wait(self.dispatchSemaphore, DISPATCH_TIME_FOREVER);
 }
 
 @end
