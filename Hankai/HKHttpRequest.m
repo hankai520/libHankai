@@ -101,7 +101,9 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
             req.error = error;
             req.responseData = data;
             if (req->requestDidFinish != nil) {
-                req->requestDidFinish(error, req);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    req->requestDidFinish(error, req);
+                });
             }
             if (self.dispatchSemaphore != nil) {
                 dispatch_semaphore_signal(req.dispatchSemaphore);
