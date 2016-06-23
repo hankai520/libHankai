@@ -142,7 +142,7 @@ static CGFloat  HKActionViewYOffset     = 0;
     }
     
     //adjust size of background view, set full-size according to parent view's size.
-    
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.parentView.frame.size.width, self.frame.size.height);
     if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
         self.backgroundView.frame = CGRectMake(0.0f, 0.0f,
                                                self.parentView.frame.size.height,
