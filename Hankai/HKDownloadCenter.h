@@ -128,7 +128,7 @@ typedef void (^HttpResourceDownloadDidFinish)(NSError * error, BOOL fromCache, N
 /**
  *  取消一个下载分组中得所有下载
  *
- *  @param groupID 分组标识
+ *  @param groupId 分组标识
  */
 - (void)cancelDownloadProcessWithGroupId:(id)groupId;
 

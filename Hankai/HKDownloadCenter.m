@@ -47,19 +47,12 @@ NSString * NDHttpResourceReceiverUserInfoKey            = @"NDHttpResourceReceiv
 @implementation HKDefaultDownloader
 
 - (NSData *)downloadResourceAt:(NSURL *)url error:(NSError *__autoreleasing *)error {
-    __block BOOL done = NO;
-    __block NSData * data = nil;
-    httpGet(url.absoluteString, nil, ^(NSError *err, HKHttpRequest * originalRequest) {
-        if (err == nil) {
-            data = originalRequest.responseData;
-        }
-        done = YES;
-        *error = err;
-    });
-    while (!done) {
-        [NSThread sleepForTimeInterval:0.001f];//1ms
+    HKHttpRequest * request = [HKHttpRequest get:url.absoluteString withParams:nil];
+    [request startSynchronously];
+    if (error != nil) {
+        *error = request.error;
     }
-    return data;
+    return request.responseData;
 }
 
 @end
