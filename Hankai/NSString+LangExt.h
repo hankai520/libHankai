@@ -137,6 +137,13 @@
  */
 - (BOOL)isEmail;
 
+/**
+ 将字符串转换为数字。
+ 
+ @return 数字
+ */
+- (NSNumber *)toNSNumber;
+
 @end
 
 /**

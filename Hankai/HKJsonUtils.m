@@ -25,7 +25,7 @@
 
 #import "HKJsonUtils.h"
 #import "HKReflection.h"
-#import "NSDate+LangExt.h"
+#import "HKTypeConverter.h"
 
 @implementation HKJsonUtils
 
@@ -56,16 +56,7 @@
                     if (type != nil) {
                         Class clazz = NSClassFromString(type);
                         if (![value isKindOfClass:clazz]) {
-                            if (clazz == [NSDate class]) {
-                                if ([object respondsToSelector:@selector(dateFormat)]) {
-                                    NSString * fmt = [object dateFormat];
-                                    if ([fmt isEqualToString:TIMESTAMP_FORMAT]) {
-                                        value = [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
-                                    } else {
-                                        value = [NSDate dateFromNSString:value withFormat:fmt];
-                                    }
-                                }
-                            }
+                            value = [HKTypeConverterCenter convert:value toType:clazz];
                         }
                         if (isNil) {
                             value = nil;

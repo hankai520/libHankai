@@ -98,11 +98,6 @@
 	CGContextRestoreGState(context);
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    self.layer.borderWidth = 0.0f;
-    self.layer.borderColor = [UIColor whiteColor].CGColor;
-}
-
 - (void)blinkBorderWithColor:(UIColor *)color duration:(CFTimeInterval)duration {
     self.layer.borderWidth = 4.0f;
     
@@ -183,5 +178,15 @@ static NSString * const HKViewTappedActionKey      = @"whenTapped";
     
     objc_setAssociatedObject(self, &HKViewTappedActionKey, action, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStart:(CAAnimation *)anim {}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    self.layer.borderWidth = 0.0f;
+    self.layer.borderColor = [UIColor whiteColor].CGColor;
+}
+
 
 @end

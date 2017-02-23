@@ -128,6 +128,8 @@ static CGFloat  HKActionViewYOffset     = 0;
         return;
     }
     
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
     _animation = animation;
     
     self.parentView = parentView;
@@ -154,9 +156,7 @@ static CGFloat  HKActionViewYOffset     = 0;
     }
     
     [parentView addSubview:self.backgroundView];
-    
     [parentView addSubview:self];
-    
     [self playShowAnimation:animation];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:HKActionViewWillAppear object:nil];

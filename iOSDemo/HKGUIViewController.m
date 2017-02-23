@@ -24,8 +24,11 @@
 //  THE SOFTWARE.
 
 #import "HKGUIViewController.h"
+@import Hankai;
 
-@interface HKGUIViewController ()
+@interface HKGUIViewController () {
+    IBOutlet HKActionView * actionView;
+}
 
 @end
 
@@ -39,6 +42,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Events
+
+- (IBAction)showToast:(id)sender {
+    [HKToastView presentInWindowWithText:@"hello, toast!adsfasdfasdfasdfasdfasdf"];
+}
+
+- (IBAction)showActionView:(id)sender {
+    [actionView showInView:self.view.window modal:YES];
 }
 
 @end

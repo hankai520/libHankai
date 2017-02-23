@@ -73,27 +73,27 @@
 @implementation NSDate (DateParts)
 
 - (NSInteger)year {
-    return [self dateParts:NSYearCalendarUnit].year;
+    return [self dateParts:NSCalendarUnitYear].year;
 }
 
 - (NSInteger)month {
-    return [self dateParts:NSMonthCalendarUnit].month;
+    return [self dateParts:NSCalendarUnitMonth].month;
 }
 
 - (NSInteger)day {
-    return [self dateParts:NSDayCalendarUnit].day;
+    return [self dateParts:NSCalendarUnitDay].day;
 }
 
 - (NSInteger)hour {
-    return [self dateParts:NSHourCalendarUnit].hour;
+    return [self dateParts:NSCalendarUnitHour].hour;
 }
 
 - (NSInteger)minute {
-    return [self dateParts:NSMinuteCalendarUnit].minute;
+    return [self dateParts:NSCalendarUnitMinute].minute;
 }
 
 - (NSInteger)second {
-    return [self dateParts:NSSecondCalendarUnit].second;
+    return [self dateParts:NSCalendarUnitSecond].second;
 }
 
 @end
@@ -261,8 +261,8 @@
 }
 
 - (NSDateInfo)dateInfo {
-    NSUInteger flag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
-    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSUInteger flag = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay |
+    NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
 	NSDateComponents *comps = [[NSCalendar currentCalendar] components:flag fromDate:self];
     NSDateInfo  dateInfo;
     dateInfo.year = comps.year;

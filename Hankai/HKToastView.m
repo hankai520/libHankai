@@ -37,6 +37,14 @@
 
 @implementation HKToastView
 
+- (CGRect)getDefaultFrame {
+    CGFloat x,y,w=150,h=50;
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    x = (window.frame.size.width-w)/2;
+    y = window.frame.size.height - h - 100;
+    return CGRectMake(x, y, w, h);
+}
+
 - (void)updateFrames {
     self.frame = toastFrame;
     CGFloat w = toastFrame.size.width - textEdgeInsets.left - textEdgeInsets.right;
@@ -50,9 +58,10 @@
     if (toast == nil) {
         toast = [[HKToastView alloc] initWithFrame:CGRectZero];
         toast.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.7f];
-        toast.radius = 2.0f;
+        toast.radius = 6.0f;
         toast->autoDismissSeconds = 2;
         toast->textEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
+        toast->toastFrame = [toast getDefaultFrame];
         
         toast->textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         toast->textLabel.backgroundColor = [UIColor clearColor];

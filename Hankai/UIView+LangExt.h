@@ -30,7 +30,7 @@ typedef void (^HKViewTapped)(void);
 /**
  *  UIView 语言扩展
  */
-@interface UIView (LangExt)
+@interface UIView (LangExt) <CAAnimationDelegate>
 
 @property (nonatomic, assign) CGFloat   radius; //设置视图的圆角半径
 

@@ -49,6 +49,7 @@
 #import <Hankai/GCDrawingImageView.h>
 #import <Hankai/HKDownloadCenter.h>
 #import <Hankai/HKHttpRequest.h>
+#import <Hankai/HKTypeConverter.h>
 #import <Hankai/HKFilterManager.h>
 #import <Hankai/HKReflection.h>
 #import <Hankai/HKJsonUtils.h>
