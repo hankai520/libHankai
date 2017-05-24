@@ -47,6 +47,7 @@
 #import <Hankai/HKMD5Helper.h>
 #import <Hankai/HKActionView.h>
 #import <Hankai/GCDrawingImageView.h>
+#import <Hankai/HKConfigViewController.h>
 #import <Hankai/HKDownloadCenter.h>
 #import <Hankai/HKHttpRequest.h>
 #import <Hankai/HKTypeConverter.h>

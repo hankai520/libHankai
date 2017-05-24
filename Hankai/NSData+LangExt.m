@@ -23,7 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "NSData+langExt.h"
+#import "NSData+LangExt.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import "HKAESHelper.h"
 #import "HKMD5Helper.h"

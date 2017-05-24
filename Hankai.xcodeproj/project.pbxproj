@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26044B021E77F15800358594 /* HKConfigViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 26044B001E77F15800358594 /* HKConfigViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26044B031E77F15800358594 /* HKConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26044B011E77F15800358594 /* HKConfigViewController.m */; };
 		266821661C3D7F01001F369D /* Hankai.h in Headers */ = {isa = PBXBuildFile; fileRef = 266821651C3D7F01001F369D /* Hankai.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2668216E1C3D7F6A001F369D /* HKVars.h in Headers */ = {isa = PBXBuildFile; fileRef = 2668216D1C3D7F6A001F369D /* HKVars.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		266821851C3D7FD5001F369D /* HKActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 266821771C3D7FD5001F369D /* HKActionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,6 +98,7 @@
 		269F284B1E58344500FBA248 /* HKTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F28491E58344500FBA248 /* HKTypeConverter.m */; };
 		26C4BD251C5B3F4C000B2D0A /* UITableView+LangExt.h in Headers */ = {isa = PBXBuildFile; fileRef = 26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26C4BD261C5B3F4C000B2D0A /* UITableView+LangExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */; };
+		26CB915C1ED52A73000082E1 /* GCDrawingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CB915B1ED52A72000082E1 /* GCDrawingImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26044B001E77F15800358594 /* HKConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKConfigViewController.h; sourceTree = "<group>"; };
+		26044B011E77F15800358594 /* HKConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKConfigViewController.m; sourceTree = "<group>"; };
 		266821621C3D7F01001F369D /* Hankai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hankai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		266821651C3D7F01001F369D /* Hankai.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hankai.h; sourceTree = "<group>"; };
 		266821671C3D7F01001F369D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,6 +218,8 @@
 		269F28491E58344500FBA248 /* HKTypeConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTypeConverter.m; sourceTree = "<group>"; };
 		26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+LangExt.h"; sourceTree = "<group>"; };
 		26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+LangExt.m"; sourceTree = "<group>"; };
+		26CB915A1ED52A72000082E1 /* GCDrawingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDrawingImageViewController.h; sourceTree = "<group>"; };
+		26CB915B1ED52A72000082E1 /* GCDrawingImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDrawingImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +413,8 @@
 				266821821C3D7FD5001F369D /* HKImageCollectionViewCell.m */,
 				266821831C3D7FD5001F369D /* GCDrawingImageView.h */,
 				266821841C3D7FD5001F369D /* GCDrawingImageView.m */,
+				26044B001E77F15800358594 /* HKConfigViewController.h */,
+				26044B011E77F15800358594 /* HKConfigViewController.m */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -430,6 +439,8 @@
 				266822391C3D85C8001F369D /* HKAudioViewController.m */,
 				2668223A1C3D85C8001F369D /* HKGUIViewController.h */,
 				2668223B1C3D85C8001F369D /* HKGUIViewController.m */,
+				26CB915A1ED52A72000082E1 /* GCDrawingImageViewController.h */,
+				26CB915B1ED52A72000082E1 /* GCDrawingImageViewController.m */,
 				2668223C1C3D85C8001F369D /* HKLangExtViewController.h */,
 				2668223D1C3D85C8001F369D /* HKLangExtViewController.m */,
 				2668222C1C3D85A7001F369D /* Main.storyboard */,
@@ -494,6 +505,7 @@
 				266821E91C3D8046001F369D /* NSObject+LangExt.h in Headers */,
 				266821FB1C3D8046001F369D /* UITableViewCell+LangExt.h in Headers */,
 				269F284A1E58344500FBA248 /* HKTypeConverter.h in Headers */,
+				26044B021E77F15800358594 /* HKConfigViewController.h in Headers */,
 				266821FF1C3D8046001F369D /* UISearchBar+LangExt.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,6 +647,7 @@
 				266821EC1C3D8046001F369D /* NSString+LangExt.m in Sources */,
 				266821BE1C3D803B001F369D /* HKHttpRequest.m in Sources */,
 				266822021C3D8046001F369D /* UITextField+LangExt.m in Sources */,
+				26044B031E77F15800358594 /* HKConfigViewController.m in Sources */,
 				2668219E1C3D7FFD001F369D /* HKAudioUtils.m in Sources */,
 				266821F81C3D8046001F369D /* UIImageView+LangExt.m in Sources */,
 				266821F21C3D8046001F369D /* UIColor+LangExt.m in Sources */,
@@ -685,6 +698,7 @@
 				266822251C3D85A7001F369D /* AppDelegate.m in Sources */,
 				266822221C3D85A7001F369D /* main.m in Sources */,
 				2668223E1C3D85C8001F369D /* HKAudioViewController.m in Sources */,
+				26CB915C1ED52A73000082E1 /* GCDrawingImageViewController.m in Sources */,
 				2668223F1C3D85C8001F369D /* HKGUIViewController.m in Sources */,
 				266822401C3D85C8001F369D /* HKLangExtViewController.m in Sources */,
 			);
