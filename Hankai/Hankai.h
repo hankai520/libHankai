@@ -62,3 +62,4 @@
 #import <Hankai/HKAudioStreaming.h>
 #import <Hankai/HKAudioUtils.h>
 #import <Hankai/UITableView+LangExt.h>
+#import <Hankai/UIButton+LangExt.h>

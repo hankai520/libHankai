@@ -94,6 +94,8 @@
 		2668223F1C3D85C8001F369D /* HKGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223B1C3D85C8001F369D /* HKGUIViewController.m */; };
 		266822401C3D85C8001F369D /* HKLangExtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223D1C3D85C8001F369D /* HKLangExtViewController.m */; };
 		266BBA011C3D8F69009DD4C9 /* Hankai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 266821621C3D7F01001F369D /* Hankai.framework */; };
+		2682E68D1ED670C1001713D5 /* UIButton+LangExt.h in Headers */ = {isa = PBXBuildFile; fileRef = 2682E68B1ED670C1001713D5 /* UIButton+LangExt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2682E68E1ED670C1001713D5 /* UIButton+LangExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2682E68C1ED670C1001713D5 /* UIButton+LangExt.m */; };
 		269F284A1E58344500FBA248 /* HKTypeConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 269F28481E58344500FBA248 /* HKTypeConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		269F284B1E58344500FBA248 /* HKTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F28491E58344500FBA248 /* HKTypeConverter.m */; };
 		26C4BD251C5B3F4C000B2D0A /* UITableView+LangExt.h in Headers */ = {isa = PBXBuildFile; fileRef = 26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -214,6 +216,8 @@
 		2668223B1C3D85C8001F369D /* HKGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKGUIViewController.m; sourceTree = "<group>"; };
 		2668223C1C3D85C8001F369D /* HKLangExtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLangExtViewController.h; sourceTree = "<group>"; };
 		2668223D1C3D85C8001F369D /* HKLangExtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLangExtViewController.m; sourceTree = "<group>"; };
+		2682E68B1ED670C1001713D5 /* UIButton+LangExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LangExt.h"; sourceTree = "<group>"; };
+		2682E68C1ED670C1001713D5 /* UIButton+LangExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LangExt.m"; sourceTree = "<group>"; };
 		269F28481E58344500FBA248 /* HKTypeConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTypeConverter.h; sourceTree = "<group>"; };
 		269F28491E58344500FBA248 /* HKTypeConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTypeConverter.m; sourceTree = "<group>"; };
 		26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+LangExt.h"; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 				266821E01C3D8046001F369D /* UITextField+LangExt.m */,
 				26C4BD231C5B3F4C000B2D0A /* UITableView+LangExt.h */,
 				26C4BD241C5B3F4C000B2D0A /* UITableView+LangExt.m */,
+				2682E68B1ED670C1001713D5 /* UIButton+LangExt.h */,
+				2682E68C1ED670C1001713D5 /* UIButton+LangExt.m */,
 			);
 			name = LangExt;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				266821FB1C3D8046001F369D /* UITableViewCell+LangExt.h in Headers */,
 				269F284A1E58344500FBA248 /* HKTypeConverter.h in Headers */,
 				26044B021E77F15800358594 /* HKConfigViewController.h in Headers */,
+				2682E68D1ED670C1001713D5 /* UIButton+LangExt.h in Headers */,
 				266821FF1C3D8046001F369D /* UISearchBar+LangExt.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,6 +656,7 @@
 				266822021C3D8046001F369D /* UITextField+LangExt.m in Sources */,
 				26044B031E77F15800358594 /* HKConfigViewController.m in Sources */,
 				2668219E1C3D7FFD001F369D /* HKAudioUtils.m in Sources */,
+				2682E68E1ED670C1001713D5 /* UIButton+LangExt.m in Sources */,
 				266821F81C3D8046001F369D /* UIImageView+LangExt.m in Sources */,
 				266821F21C3D8046001F369D /* UIColor+LangExt.m in Sources */,
 				266822001C3D8046001F369D /* UISearchBar+LangExt.m in Sources */,
