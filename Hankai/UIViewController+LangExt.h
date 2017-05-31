@@ -37,4 +37,14 @@
  */
 - (IBAction)popViewController;
 
+/**
+ 清空当前导航控制器栈。
+ */
+- (IBAction)popToRootViewController;
+
+/**
+ 清空当前导航控制器栈，关闭当前弹出的模态页面。
+ */
+- (IBAction)popToRootAndDismissViewController;
+
 @end

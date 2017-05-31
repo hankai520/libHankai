@@ -39,4 +39,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)popToRootViewController {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)popToRootAndDismissViewController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }];
+}
+
 @end

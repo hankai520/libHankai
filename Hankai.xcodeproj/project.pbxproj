@@ -88,8 +88,8 @@
 		266822221C3D85A7001F369D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 266822211C3D85A7001F369D /* main.m */; };
 		266822251C3D85A7001F369D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266822241C3D85A7001F369D /* AppDelegate.m */; };
 		2668222E1C3D85A7001F369D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2668222C1C3D85A7001F369D /* Main.storyboard */; };
-		266822301C3D85A7001F369D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2668222F1C3D85A7001F369D /* Assets.xcassets */; };
-		266822331C3D85A7001F369D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 266822311C3D85A7001F369D /* LaunchScreen.storyboard */; };
+		266822301C3D85A7001F369D /* LibHankaiAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2668222F1C3D85A7001F369D /* LibHankaiAssets.xcassets */; };
+		266822331C3D85A7001F369D /* LibHankaiLaunch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 266822311C3D85A7001F369D /* LibHankaiLaunch.storyboard */; };
 		2668223E1C3D85C8001F369D /* HKAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266822391C3D85C8001F369D /* HKAudioViewController.m */; };
 		2668223F1C3D85C8001F369D /* HKGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223B1C3D85C8001F369D /* HKGUIViewController.m */; };
 		266822401C3D85C8001F369D /* HKLangExtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2668223D1C3D85C8001F369D /* HKLangExtViewController.m */; };
@@ -207,8 +207,8 @@
 		266822231C3D85A7001F369D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		266822241C3D85A7001F369D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2668222D1C3D85A7001F369D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2668222F1C3D85A7001F369D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		266822321C3D85A7001F369D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2668222F1C3D85A7001F369D /* LibHankaiAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LibHankaiAssets.xcassets; sourceTree = "<group>"; };
+		266822321C3D85A7001F369D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LibHankaiLaunch.storyboard; sourceTree = "<group>"; };
 		266822341C3D85A7001F369D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266822381C3D85C8001F369D /* HKAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKAudioViewController.h; sourceTree = "<group>"; };
 		266822391C3D85C8001F369D /* HKAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKAudioViewController.m; sourceTree = "<group>"; };
@@ -450,8 +450,8 @@
 				2668223C1C3D85C8001F369D /* HKLangExtViewController.h */,
 				2668223D1C3D85C8001F369D /* HKLangExtViewController.m */,
 				2668222C1C3D85A7001F369D /* Main.storyboard */,
-				2668222F1C3D85A7001F369D /* Assets.xcassets */,
-				266822311C3D85A7001F369D /* LaunchScreen.storyboard */,
+				2668222F1C3D85A7001F369D /* LibHankaiAssets.xcassets */,
+				266822311C3D85A7001F369D /* LibHankaiLaunch.storyboard */,
 				266822341C3D85A7001F369D /* Info.plist */,
 				266822201C3D85A7001F369D /* Supporting Files */,
 			);
@@ -634,8 +634,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				266822331C3D85A7001F369D /* LaunchScreen.storyboard in Resources */,
-				266822301C3D85A7001F369D /* Assets.xcassets in Resources */,
+				266822331C3D85A7001F369D /* LibHankaiLaunch.storyboard in Resources */,
+				266822301C3D85A7001F369D /* LibHankaiAssets.xcassets in Resources */,
 				2668222E1C3D85A7001F369D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,12 +736,12 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		266822311C3D85A7001F369D /* LaunchScreen.storyboard */ = {
+		266822311C3D85A7001F369D /* LibHankaiLaunch.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				266822321C3D85A7001F369D /* Base */,
 			);
-			name = LaunchScreen.storyboard;
+			name = LibHankaiLaunch.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -907,6 +907,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 35GFA2FH7F;
 				INFOPLIST_FILE = iOSDemo/Info.plist;
@@ -915,6 +916,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.iOSDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -922,6 +924,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 35GFA2FH7F;
 				INFOPLIST_FILE = iOSDemo/Info.plist;
@@ -930,6 +933,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ren.hankai.iOSDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
