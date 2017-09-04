@@ -39,7 +39,7 @@
  */
 typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error);
 
-@interface HKHttpRequest () {
+@interface HKHttpRequest () <NSURLSessionDelegate> {
     __strong HKHttpRequestDidFinished               requestDidFinish;
     __strong NSURLSessionTaskCompletionHandler      taskCompletionHandler;
 }
@@ -113,6 +113,14 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     return self;
 }
 
+- (NSURLSession *)getDefaultSession {
+    NSURLSessionConfiguration * defaultConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession * defaultSession = [NSURLSession sessionWithConfiguration:defaultConfig
+                                                                  delegate:self
+                                                             delegateQueue:[NSOperationQueue mainQueue]];
+    return defaultSession;
+}
+
 + (instancetype)get:(NSString *)url withParams:(NSDictionary *)params {
     HKHttpRequest * req = [[HKHttpRequest alloc] init];
     NSMutableString * urlString = [NSMutableString stringWithString:url];
@@ -125,7 +133,7 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                            timeoutInterval:15];
     req.request.HTTPMethod = @"GET";
-    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    req.sessionTask = [[req getDefaultSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
@@ -143,7 +151,20 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     req.request.HTTPMethod = @"POST";
     [req.request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     req.request.HTTPBody = [dataString dataUsingEncoding:NSUTF8StringEncoding];
-    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    req.sessionTask = [[req getDefaultSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    return req;
+}
+
++ (instancetype)postJson:(NSString *)url withDataString:(NSString *)dataString {
+    HKHttpRequest * req = [[HKHttpRequest alloc] init];
+    NSURL * reqUrl = [NSURL URLWithString:url];
+    req.request = [[NSMutableURLRequest alloc] initWithURL:reqUrl
+                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                           timeoutInterval:15];
+    req.request.HTTPMethod = @"POST";
+    [req.request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    req.request.HTTPBody = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+    req.sessionTask = [[req getDefaultSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
@@ -157,7 +178,7 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     [req.request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [req.request addValue:[NSString stringWithFormat:@"%lu", (unsigned long)rawData.length] forHTTPHeaderField:@"Content-Length"];
     req.request.HTTPBody = rawData;
-    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    req.sessionTask = [[req getDefaultSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
@@ -172,7 +193,7 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     [req.request addValue:[NSString stringWithFormat:@"multipart/form-data;boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
     req.request.HTTPBody = [self buildMultipart:parts boundary:boundary];
     
-    req.sessionTask = [[NSURLSession sharedSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
+    req.sessionTask = [[req getDefaultSession] dataTaskWithRequest:req.request completionHandler:req->taskCompletionHandler];
     return req;
 }
 
@@ -191,7 +212,7 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
             return NSOrderedSame;
         }
     }];
-
+    
     NSMutableArray * pairs = [[NSMutableArray alloc] initWithCapacity:[params count]];
     NSString * value = nil;
     for (NSString * key  in keys) {
@@ -234,6 +255,28 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
     dispatch_semaphore_wait(self.dispatchSemaphore, DISPATCH_TIME_FOREVER);
 }
 
+#pragma mark - NSURLSessionDelegate
+
+- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
+    
+}
+
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
+    
+}
+
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
+    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
+        //如果 info.plist 允许任意访问，则不再检查服务器信任情况
+        NSDictionary * ats = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSAppTransportSecurity"];
+        BOOL allowArbitrary = [[ats valueForKey:@"NSAllowsArbitraryLoads"] boolValue];
+        if (allowArbitrary) {
+            NSURLCredential * credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+            completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+        }
+    }
+}
+
 @end
 
 
@@ -250,7 +293,7 @@ void httpPostForm(NSString * url, NSDictionary * params, HKHttpRequestDidFinishe
 }
 
 void httpPostJson(NSString * url, NSString * json, HKHttpRequestDidFinished callback) {
-    HKHttpRequest * request = [HKHttpRequest post:url withDataString:json];
+    HKHttpRequest * request = [HKHttpRequest postJson:url withDataString:json];
     [request setCompletionBlock:callback];
     [request start];
 }
