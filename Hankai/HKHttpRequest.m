@@ -273,6 +273,8 @@ typedef void (^NSURLSessionTaskCompletionHandler)(NSData * __nullable data, NSUR
         if (allowArbitrary) {
             NSURLCredential * credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
             completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+        } else {
+            completionHandler(NSURLSessionAuthChallengeUseCredential, nil);
         }
     }
 }
