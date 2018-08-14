@@ -1,0 +1,23 @@
+apply plugin: 'java-library'
+
+jar {
+    baseName = "libHankai"
+    version = mainVersion
+    manifest {
+        attributes(
+            "Implementation-Version": mainVersion
+        )
+    }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.sun.mail:android-mail:1.5.6'
+    compile 'com.sun.mail:android-activation:1.5.6'
+
+    testImplementation 'junit:junit:4.12'
+}
+

@@ -1,0 +1,24 @@
+ext {
+    mainVersion = "0.0.1.RELEASE"
+    compileSdkVersion = 26
+    supportLibVersion = "27.1.1"
+}
+
+buildscript {
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
